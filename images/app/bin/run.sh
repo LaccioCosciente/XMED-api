@@ -1,3 +1,7 @@
 #!/bin/bash
 
-fastapi dev
+BIN=$( dirname "$0")
+PREFIX=$(dirname "$BIN" )
+VENV_DIR="${PREFIX}/main.py"
+
+fastapi dev $VENV_DIR

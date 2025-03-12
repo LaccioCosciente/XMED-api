@@ -3,7 +3,6 @@
 
 Usage()
 {
-	echo
 	echo "Usage: /bin/bash $0 --help"
 	echo "options:"
 	echo "-h, --help    Print this help"
