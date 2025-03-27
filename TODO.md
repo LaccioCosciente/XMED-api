@@ -5,12 +5,10 @@ Version - 0.0.1-alpha
 - [x] create base enviroment using FASTAPI
 - [x] implement routers
 - [x] implement main
-- [ ] firsts functions
 - [ ] add pydnatic models
 - [ ] add authnticatin system
 - [ ] add errors handler
-- [ ] implement  api to get operations
-- [ ] implement test script
+- [ ] implement pipelinetest script
 
 Version - 0.0.2-alpha
 - [ ] Convert coming audio data into text
