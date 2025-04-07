@@ -1,4 +1,5 @@
-from src.v1.calc import agent
+from src.v1.agent import agent
+from fastapi.responses import JSONResponse
 
 from fastapi import Request, APIRouter
 
@@ -19,7 +20,8 @@ async def create_booking(
     No authentication required
     """
 
-    return await agent.create_booking(
+    response = await agent.create_booking(
         request,
         data 
     )
+    return JSONResponse(content=response)

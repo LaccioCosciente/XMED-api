@@ -14,6 +14,9 @@ class Settings():
     ROOT_PATH: str = ""
     SUMMARY: str = "These APi will allow yuo to perform a smooth experience using Elevenlabs service"
 
+    # Agent ids
+    CESARE: str = 'JQs3sHjD1wG0KtfcTji3'
+
     # ========== TOKENS ==========
     elevenlabs_api_key: str = os.getenv('ELEVENLABS_API_KEY')
     voice_id: str="JBFqnCBsd6RMkjVDRZzb"
@@ -26,6 +29,8 @@ class Settings():
     speech_to_text: str = "speech-to-text"
 
     elevenlabs_url: str = "https://api.elevenlabs.io/v1/method/"
+
+    elevenlabs_url_agent: str = "https://api.elevenlabs.io/v1/convai/agents/agent_id"
 
     save_audio_path: str = '/home/emir/Documents/personal/XMED/XMED-api/images/app/var/audios'
 

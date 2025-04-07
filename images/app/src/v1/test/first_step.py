@@ -9,8 +9,8 @@ from fastapi.responses import StreamingResponse, JSONResponse
 
 async def get_audio_from_text(
     request: Request,
-    text: str
-)-> bin:
+    text: bytes
+)-> StreamingResponse:
     """
     This async function use the ELevenlabs API sending a input text and returning a audio file
     Args:
@@ -25,26 +25,30 @@ async def get_audio_from_text(
         "xi-api-key": settings.elevenlabs_api_key,
         "Content-Type": "application/json"
     }
-
     audio_format = {
         "text": str(text),
         "model_id": "eleven_multilingual_v2",
         "voice_settings": {"stability": 1.0, "similarity_boost": 0.5}
     }
 
+    timeout = aiohttp.ClientTimeout(total=60)
+    response = await request.state.session.post(settings.elevenlabs_url.replace('method', settings.text_to_speech) + settings.voice_id, headers=headers, json=audio_format, timeout=timeout)
+
     # Make request to Elevenlabs
-    async with aiohttp.ClientSession() as session:
-        async with session.post(settings.elevenlabs_url.replace('method', settings.text_to_speech) + settings.voice_id, headers=headers, json=audio_format) as response:
-            if response.status == 200:
-                mp3_data = await response.read()
-                mp3_file = io.BytesIO(mp3_data)
-            else:
-                error_message = await response.text()
-                raise Exception(f"Errore: {response.status} - {error_message}\n")
+    if response.status != 200:
+        error_message = await response.text()
+        raise Exception(f"Errore: {response.status} - {error_message}\n")
+
+    mp3_data = await response.read()
+    mp3_file = io.BytesIO(mp3_data)
 
     # Saving file
     try:
-        return StreamingResponse(mp3_file, media_type="audio/mpeg", headers={"Content-Disposition": "attachment; filename=output.mp3"})
+        return StreamingResponse(
+            mp3_file,
+            media_type="audio/mpeg",
+            headers={"Content-Disposition": "attachment; filename=output.mp3"}
+        )
     except Exception as e:
         return {"error": str(e)}
 
@@ -81,9 +85,15 @@ async def get_text_from_audio(
         "content_type":"audio/mpeg"
     }
 
-    async with aiohttp.ClientSession() as session:
-        async with session.post(url, headers=headers, data=data) as response:
-            if response.status == 200:
-                return await response.json()
-            else:
-                raise Exception(f"Failed: {response.status}")
+    timeout = aiohttp.ClientTimeout(total=60)
+    response = await request.state.session.post(
+        url,
+        headers=headers,
+        data=data,
+        timeout=timeout
+    )
+
+    if response.status != 200:
+        raise Exception(f"Failed: {response.status}")
+
+    return await response.json()

@@ -1,5 +1,6 @@
 from src.v1.test import first_step
 from fastapi import Request, APIRouter, UploadFile, File
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
@@ -40,7 +41,8 @@ async def get_text_from_audio(
     No authentication required
     """
 
-    return await first_step.get_text_from_audio(
+    response =  await first_step.get_text_from_audio(
         request,
         file 
     )
+    return JSONResponse(response)

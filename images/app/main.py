@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from etc.config import settings
 from src.v1.test import routers as config_apis_v1
-from src.v1.calc import routers as agent_apis_v1
+from src.v1.agent import routers as agent_apis_v1
 from fastapi.middleware.cors import CORSMiddleware
 from libs.logger.middleware import JsonLoggingMiddleware
+from libs.aiohttp.middleware import AIOHTTPConnectionMiddleware
 
 
 app = FastAPI(
@@ -25,6 +26,7 @@ app.add_middleware(
 )
 
 app.add_middleware(JsonLoggingMiddleware)
+app.add_middleware(AIOHTTPConnectionMiddleware)
 
 # =============== Routes ==================
 
@@ -34,8 +36,8 @@ app.include_router(
     tags=["test"]
 )
 
-app.include_router(
-    agent_apis_v1.router,
-    prefix="/api/v1/calc",
-    tags=["calc"]
-)
+# app.include_router(
+#     agent_apis_v1.router,
+#     prefix="/api/v1/agent",
+#     tags=["agent"]
+# )
