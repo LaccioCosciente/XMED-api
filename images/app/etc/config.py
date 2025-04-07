@@ -18,7 +18,15 @@ class Settings():
     elevenlabs_api_key: str = os.getenv('ELEVENLABS_API_KEY')
     voice_id: str="JBFqnCBsd6RMkjVDRZzb"
 
+    # calc auth
+    calc_api_key: str = 'cal_live_d8ab90417cf3f9fb60b9e70d21832627'
+
     # ========== paths-urls ==========
-    elevenlabs_url: str = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+    text_to_speech: str = "text-to-speech"
+    speech_to_text: str = "speech-to-text"
+
+    elevenlabs_url: str = "https://api.elevenlabs.io/v1/method/"
+
+    save_audio_path: str = '/home/emir/Documents/personal/XMED/XMED-api/images/app/var/audios'
 
 settings = Settings()

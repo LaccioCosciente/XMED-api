@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from etc.config import settings
 from src.v1.test import routers as config_apis_v1
+from src.v1.calc import routers as agent_apis_v1
 from fastapi.middleware.cors import CORSMiddleware
 from libs.logger.middleware import JsonLoggingMiddleware
 
@@ -34,7 +35,7 @@ app.include_router(
 )
 
 app.include_router(
-    config_apis_v1.router,
-    prefix="/api/v1/flow",
-    tags=["flow"]
+    agent_apis_v1.router,
+    prefix="/api/v1/calc",
+    tags=["calc"]
 )
