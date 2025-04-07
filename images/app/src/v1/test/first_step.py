@@ -32,7 +32,12 @@ async def get_audio_from_text(
     }
 
     timeout = aiohttp.ClientTimeout(total=60)
-    response = await request.state.session.post(settings.elevenlabs_url.replace('method', settings.text_to_speech) + settings.voice_id, headers=headers, json=audio_format, timeout=timeout)
+    response = await request.state.session.post(
+        settings.elevenlabs_url.replace('__method__', settings.text_to_speech) + settings.voice_id,
+        headers=headers,
+        json=audio_format,
+        timeout=timeout
+    )
 
     # Make request to Elevenlabs
     if response.status != 200:

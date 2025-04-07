@@ -18,7 +18,7 @@ class Settings():
     CESARE: str = 'JQs3sHjD1wG0KtfcTji3'
 
     # ========== TOKENS ==========
-    elevenlabs_api_key: str = os.getenv('ELEVENLABS_API_KEY')
+    elevenlabs_api_key: str = os.getenv('ELEVENLABS_API_KEY', "sk_5e56319fc3ac4c89a9dfa435a29802e8f2150cab8f26c78b")
     voice_id: str="JBFqnCBsd6RMkjVDRZzb"
 
     # calc auth
@@ -28,9 +28,13 @@ class Settings():
     text_to_speech: str = "text-to-speech"
     speech_to_text: str = "speech-to-text"
 
-    elevenlabs_url: str = "https://api.elevenlabs.io/v1/method/"
+    elevenlabs_url: str = "https://api.elevenlabs.io/v1/__method__/"
 
+    # Agent
     elevenlabs_url_agent: str = "https://api.elevenlabs.io/v1/convai/agents/agent_id"
+    
+    # Conversation Agent
+    elevenlabs_url_agent_conversation: str = 'https://api.elevenlabs.io/v1/convai/conversation/__method__'
 
     save_audio_path: str = '/home/emir/Documents/personal/XMED/XMED-api/images/app/var/audios'
 

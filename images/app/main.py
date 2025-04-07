@@ -1,3 +1,4 @@
+import logging
 from fastapi import FastAPI
 from etc.config import settings
 from src.v1.test import routers as config_apis_v1
@@ -36,8 +37,20 @@ app.include_router(
     tags=["test"]
 )
 
-# app.include_router(
-#     agent_apis_v1.router,
-#     prefix="/api/v1/agent",
-#     tags=["agent"]
-# )
+app.include_router(
+    agent_apis_v1.router,
+    prefix="/api/v1/agent",
+    tags=["agent"]
+)
+
+
+#  =============== Turn off logs ===============
+# Comment to enable logs
+logging.getLogger("fastapi").setLevel(logging.CRITICAL)
+logging.getLogger("uvicorn").setLevel(logging.CRITICAL)
+logging.getLogger("uvicorn.error").setLevel(logging.CRITICAL)
+logging.getLogger("uvicorn.access").setLevel(logging.CRITICAL)
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", reload=True, log_level="debug")

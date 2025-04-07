@@ -1,6 +1,6 @@
 from src.v1.test import first_step
-from fastapi import Request, APIRouter, UploadFile, File
 from fastapi.responses import JSONResponse
+from fastapi import Request, APIRouter, UploadFile, File
 
 router = APIRouter()
 
