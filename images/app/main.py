@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from etc.config import settings
 from src.v1.test import routers as config_apis_v1
 from src.v1.agent import routers as agent_apis_v1
+from src.v1.calc import routers as calc_apis_v1
 from fastapi.middleware.cors import CORSMiddleware
 from libs.logger.middleware import JsonLoggingMiddleware
 from libs.aiohttp.middleware import AIOHTTPConnectionMiddleware
@@ -43,6 +44,11 @@ app.include_router(
     tags=["agent"]
 )
 
+app.include_router(
+    calc_apis_v1.router,
+    prefix="/api/v1/calc",
+    tags=["calc"]
+)
 
 #  =============== Turn off logs ===============
 # Comment to enable logs

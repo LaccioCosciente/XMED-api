@@ -133,7 +133,7 @@ async def get_agent_conversation_details(
     request: Request,
     conversation_id: str
 )-> dict:
-    print(conversation_id)
+
     """
     This async function use the ELevenlabs API return conversation details given a conversation id
 

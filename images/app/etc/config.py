@@ -22,7 +22,7 @@ class Settings():
     voice_id: str="JBFqnCBsd6RMkjVDRZzb"
 
     # calc auth
-    calc_api_key: str = 'cal_live_d8ab90417cf3f9fb60b9e70d21832627'
+    calc_api_key: str = 'cal_live_392d83aaedb9231a58bf83b8d245b3b3'
 
     # ========== paths-urls ==========
     text_to_speech: str = "text-to-speech"
